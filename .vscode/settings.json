@@ -1,0 +1,16 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.organizeImports": "always"
+  },
+  "editor.fontFamily": "'FiraCode Nerd Font','Hack Nerd Font','JetBrains Mono'",
+  "editor.fontSize": 14,
+  "editor.tabSize": 2,
+  "editor.cursorStyle": "block",
+  "prettier.arrowParens": "avoid",
+  "files.associations": {
+    "*css": "tailwindcss"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
