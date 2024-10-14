@@ -1,5 +1,7 @@
 "use client";
 
+import { Route } from "next";
+import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
 
 import {
@@ -53,14 +55,14 @@ const Links = () => {
   );
 };
 
-const NavLink = ({
+const NavLink = <T extends string>({
+  FlyoutContent,
   children,
   href,
-  FlyoutContent,
 }: {
-  children: React.ReactNode;
-  href: string;
   FlyoutContent?: React.ElementType;
+  children: React.ReactNode;
+  href: Route<T> | URL;
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -72,7 +74,7 @@ const NavLink = ({
       onMouseLeave={() => setOpen(false)}
       className="relative h-fit w-fit"
     >
-      <a href={href} className="relative">
+      <Link href={href} className="relative">
         {children}
         <span
           style={{
@@ -80,7 +82,7 @@ const NavLink = ({
           }}
           className="absolute -bottom-2 -left-2 -right-2 h-1 origin-left scale-x-0 rounded-full bg-indigo-300 transition-transform duration-300 ease-out"
         />
-      </a>
+      </Link>
       <AnimatePresence>
         {showFlyout && (
           <motion.div
@@ -118,7 +120,7 @@ const MobileMenuLink = ({
   setMenuOpen,
 }: {
   children: React.ReactNode;
-  href: string;
+  href: Route | URL;
   FoldContent?: React.ElementType;
   setMenuOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -132,7 +134,7 @@ const MobileMenuLink = ({
           className="flex w-full cursor-pointer items-center justify-between border-b border-neutral-300 py-6 text-start text-2xl font-semibold"
           onClick={() => setOpen((pv) => !pv)}
         >
-          <a
+          <Link
             onClick={(e) => {
               e.stopPropagation();
               setMenuOpen(false);
@@ -140,7 +142,7 @@ const MobileMenuLink = ({
             href={href}
           >
             {children}
-          </a>
+          </Link>
           <motion.div
             animate={{ rotate: open ? "180deg" : "0deg" }}
             transition={{
@@ -152,7 +154,7 @@ const MobileMenuLink = ({
           </motion.div>
         </div>
       ) : (
-        <a
+        <Link
           onClick={(e) => {
             e.stopPropagation();
             setMenuOpen(false);
@@ -162,7 +164,7 @@ const MobileMenuLink = ({
         >
           <span>{children}</span>
           <ArrowRight />
-        </a>
+        </Link>
       )}
       {FoldContent && (
         <motion.div
@@ -288,24 +290,28 @@ const AboutUsContent = () => {
   );
 };
 
-const LINKS = [
+const LINKS: Array<{
+  text: string;
+  href: Route;
+  component?: React.ElementType;
+}> = [
   {
     text: "About us",
-    href: "#",
+    href: "/about-us" as Route,
     component: AboutUsContent,
   },
   {
     text: "Pricing",
-    href: "#",
+    href: "#" as Route,
     // component: PricingContent,
   },
   {
     text: "Careers",
-    href: "#",
+    href: "#" as Route,
     // component: CareersContent,
   },
   {
     text: "Documentation",
-    href: "#",
+    href: "#" as Route,
   },
 ];
