@@ -10,7 +10,7 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
-import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, PhoneCall, X } from "lucide-react";
 import useMeasure from "react-use-measure";
 
 import Logo from "./Logo";
@@ -27,13 +27,13 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 z-50 w-full px-6 text-black transition-all duration-300 ease-out lg:px-12 ${
         scrolled
-          ? "bg-neutral-950 py-3 shadow-xl"
+          ? "bg-neutral-950 py-3 text-white shadow-xl"
           : "bg-neutral-950/0 py-6 shadow-none"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <Logo color="black" />
-        <div className="hidden gap-6 lg:flex">
+        <Logo />
+        <div className="hidden w-1/2 justify-between gap-6 lg:flex">
           <Links />
           <CTA />
         </div>
@@ -106,8 +106,9 @@ const NavLink = <T extends string>({
 const CTA = () => {
   return (
     <div>
-      <Button size="default" variant={"outline"}>
-        Sign in
+      <Button size="default" variant={"outline"} className="flex gap-2">
+        <PhoneCall />
+        05 40 12 90 10
       </Button>
     </div>
   );
